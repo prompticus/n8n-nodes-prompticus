@@ -52,9 +52,3 @@ This Node provides operations for:
 ## Configuration
 
 You will need a Promptic.us Access Token (API credentials) in n8n to use this node.  Create an Account on Promptic.us to generate Access Tokens.
-
-## Publish Package
-
-```bash
-npm publish --access public
-```
