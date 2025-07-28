@@ -9,8 +9,8 @@ import type {
 
 const resourceProperties: INodeProperties[] = [
   {
-    default: 'prompt',
     displayName: 'Resource',
+    default: 'prompt',
     name: 'resource',
     noDataExpression: true,
     options: [
@@ -25,8 +25,8 @@ const resourceProperties: INodeProperties[] = [
 
 const operationProperties: INodeProperties[] = [
   {
-    default: 'getList',
     displayName: 'Operation',
+    default: 'getList',
     displayOptions: {
       show: {
         resource: ['prompt'],
@@ -36,32 +36,8 @@ const operationProperties: INodeProperties[] = [
     noDataExpression: true,
     options: [
       {
-        action: 'Get List of Prompts',
-        description: 'Get List of Prompts',
-        name: 'Get List',
-        routing: {
-          request: {
-            method: 'GET',
-            url: '/prompts',
-          }
-        },
-        value: 'getList',
-      },
-      {
-        action: 'Get a Prompt',
-        description: 'Get a Prompt',
-        name: 'Get One',
-        routing: {
-          request: {
-            method: 'GET',
-            url: '=/prompts/{{$parameter.guid}}',
-          },
-        },
-        value: 'getOne',
-      },
-      {
-        action: 'Create a Prompt',
-        description: 'Create a Prompt',
+        action: 'Create a prompt',
+        description: 'Create a prompt',
         name: 'Create',
         routing: {
           request: {
@@ -72,20 +48,8 @@ const operationProperties: INodeProperties[] = [
         value: 'create',
       },
       {
-        action: 'Update a Prompt',
-        description: 'Update a Prompt',
-        name: 'Update',
-        routing: {
-          request: {
-            method: 'PUT',
-            url: '=/prompts/{{$parameter.guid}}',
-          },
-        },
-        value: 'update',
-      },
-      {
-        action: 'Delete a Prompt',
-        description: 'Delete a Prompt',
+        action: 'Delete a prompt',
+        description: 'Delete a prompt',
         name: 'Delete',
         routing: {
           request: {
@@ -94,6 +58,42 @@ const operationProperties: INodeProperties[] = [
           },
         },
         value: 'delete',
+      },
+      {
+        action: 'Get list of prompts',
+        description: 'Get List of prompts',
+        name: 'Get List',
+        routing: {
+          request: {
+            method: 'GET',
+            url: '/prompts',
+          }
+        },
+        value: 'getList',
+      },
+      {
+        action: 'Get a prompt',
+        description: 'Get a prompt',
+        name: 'Get One',
+        routing: {
+          request: {
+            method: 'GET',
+            url: '=/prompts/{{$parameter.guid}}',
+          },
+        },
+        value: 'getOne',
+      },
+      {
+        action: 'Update a prompt',
+        description: 'Update a prompt',
+        name: 'Update',
+        routing: {
+          request: {
+            method: 'PUT',
+            url: '=/prompts/{{$parameter.guid}}',
+          },
+        },
+        value: 'update',
       },
     ],
     type: 'options',
@@ -115,10 +115,10 @@ const getListProperties: INodeProperties[] = [
     default: {},
     options: [
       {
+        displayName: 'Keyword',
         name: 'q',
         default: '',
-        description: 'Search by Keyword',
-        displayName: 'Keyword',
+        description: 'Search by keyword',
         type: 'string',
         routing: {
           send: {
@@ -133,9 +133,9 @@ const getListProperties: INodeProperties[] = [
 
 const getOneProperties: INodeProperties[] = [
   {
+    displayName: 'GUID',
     default: '',
     description: 'Prompt GUID (ID) to retrieve',
-    displayName: 'GUID',
     displayOptions: {
       show: {
         operation: ['getOne'],
@@ -147,9 +147,9 @@ const getOneProperties: INodeProperties[] = [
     type: 'string',
   },
   {
+    displayName: 'Dynamic Variables',
     default: {},
     description: 'Replace dynamic variables in your prompt',
-    displayName: 'Dynamic Variables',
     displayOptions: {
       show: {
         operation: ['getOne'],
@@ -163,17 +163,17 @@ const getOneProperties: INodeProperties[] = [
         name: 'pairs',
         values: [
           {
+            displayName: 'Name',
             default: '',
             description: 'Variable Name',
-            displayName: 'Name',
             name: 'key',
             required: true,
             type: 'string',
           },
           {
+            displayName: 'Value',
             default: '',
             description: 'Variable Value',
-            displayName: 'Value',
             name: 'value',
             required: true,
             type: 'string',
@@ -197,9 +197,8 @@ const getOneProperties: INodeProperties[] = [
 
 const createProperties: INodeProperties[] = [
   {
-    default: '',
-    description: 'Body',
     displayName: 'Body',
+    default: '',
     displayOptions: {
       show: {
         operation: ['create'],
@@ -220,9 +219,9 @@ const createProperties: INodeProperties[] = [
 
 const updateProperties: INodeProperties[] = [
   {
+    displayName: 'GUID',
     default: '',
     description: 'Prompt GUID to update',
-    displayName: 'GUID',
     displayOptions: {
       show: {
         operation: ['update'],
@@ -234,9 +233,8 @@ const updateProperties: INodeProperties[] = [
     type: 'string',
   },
   {
-    default: '',
-    description: 'Body',
     displayName: 'Body',
+    default: '',
     displayOptions: {
       show: {
         operation: ['update'],
@@ -256,9 +254,9 @@ const updateProperties: INodeProperties[] = [
 
 const deleteProperties: INodeProperties[] = [
   {
+    displayName: 'GUID',
     default: '',
     description: 'Prompt GUID to delete',
-    displayName: 'GUID',
     displayOptions: {
       show: {
         operation: ['delete'],
@@ -282,7 +280,7 @@ export class Prompticus implements INodeType {
     defaults: {
       name: 'Prompticus',
     },
-    description: 'Prompticus API',
+    description: 'Prompticus API Access Token',
     displayName: 'Prompticus',
     group: ['transform'],
     inputs: [NodeConnectionType.Main],

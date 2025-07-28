@@ -23,7 +23,8 @@
     "target": "es2019"
   },
   "include": [
-    "src/**/*",
+    "credentials/**/*",
+    "nodes/**/*",
     "package.json"
   ]
 }

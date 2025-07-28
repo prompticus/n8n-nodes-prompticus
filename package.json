@@ -23,6 +23,7 @@
   "homepage": "https://promptic.us",
   "keywords": [
     "n8n",
+    "n8n-community-node-package",
     "n8n-nodes",
     "prompticus"
   ],
@@ -30,12 +31,12 @@
   "main": "index.js",
   "n8n": {
     "credentials": [
-      "src/credentials/PrompticusApi.credentials.js"
+      "dist/credentials/PrompticusApi.credentials.js"
     ],
     "n8nNodesApiVersion": 1,
     "nodes": [
-      "src/nodes/Prompticus/Prompticus.node.js",
-      "src/nodes/Prompticus/prompticus.svg"
+      "dist/nodes/Prompticus/Prompticus.node.js",
+      "dist/nodes/Prompticus/prompticus.svg"
     ]
   },
   "packageManager": "pnpm@9.1.0",
@@ -47,13 +48,15 @@
     "url": "http://github.com/prompticus/n8n-nodes-prompticus"
   },
   "scripts": {
-    "build": "tsc && cp src/nodes/Prompticus/prompticus.svg dist/src/nodes/Prompticus/",
+    "build": "tsc && cp nodes/Prompticus/prompticus.svg dist/nodes/Prompticus",
     "dev": "tsc --watch",
     "dev:clean": "rm -rf node_modules/ && rm -rf dist/",
     "dev:link": "npm run build && npm link",
     "dev:n8n": "cd ~/.n8n/custom/ && npm link n8n-nodes-prompticus && n8n",
-    "format": "prettier --write src/**/*.ts",
-    "lint": "eslint package.json src/**/*.ts"
+    "format": "prettier --write nodes credentials",
+    "lint": "eslint nodes credentials package.json",
+    "lintfix": "eslint nodes credentials package.json --fix",
+    "prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js nodes credentials package.json"
   },
   "version": "1.0.0"
 }
