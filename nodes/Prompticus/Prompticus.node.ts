@@ -26,7 +26,7 @@ const resourceProperties: INodeProperties[] = [
 const operationProperties: INodeProperties[] = [
   {
     displayName: 'Operation',
-    default: 'getList',
+    default: 'getMany',
     displayOptions: {
       show: {
         resource: ['prompt'],
@@ -60,20 +60,20 @@ const operationProperties: INodeProperties[] = [
         value: 'delete',
       },
       {
-        action: 'Get list of prompts',
-        description: 'Get List of prompts',
-        name: 'Get List',
+        action: 'Get many prompts',
+        description: 'Get many prompts',
+        name: 'Get Many',
         routing: {
           request: {
             method: 'GET',
             url: '/prompts',
           }
         },
-        value: 'getList',
+        value: 'getMany',
       },
       {
-        action: 'Get a prompt',
-        description: 'Get a prompt',
+        action: 'Get one prompt',
+        description: 'Get one prompt',
         name: 'Get One',
         routing: {
           request: {
@@ -100,7 +100,7 @@ const operationProperties: INodeProperties[] = [
   }
 ];
 
-const getListProperties: INodeProperties[] = [
+const getManyProperties: INodeProperties[] = [
   {
     displayName: 'Filter',
     name: 'filter',
@@ -108,7 +108,7 @@ const getListProperties: INodeProperties[] = [
     placeholder: 'Add Filter',
     displayOptions: {
       show: {
-        operation: ['getList'],
+        operation: ['getMany'],
         resource: ['prompt'],
       }
     },
@@ -135,7 +135,7 @@ const getOneProperties: INodeProperties[] = [
   {
     displayName: 'GUID',
     default: '',
-    description: 'Prompt GUID (ID) to retrieve',
+    description: 'Prompt GUID',
     displayOptions: {
       show: {
         operation: ['getOne'],
@@ -221,7 +221,7 @@ const updateProperties: INodeProperties[] = [
   {
     displayName: 'GUID',
     default: '',
-    description: 'Prompt GUID to update',
+    description: 'Prompt GUID',
     displayOptions: {
       show: {
         operation: ['update'],
@@ -256,7 +256,7 @@ const deleteProperties: INodeProperties[] = [
   {
     displayName: 'GUID',
     default: '',
-    description: 'Prompt GUID to delete',
+    description: 'Prompt GUID',
     displayOptions: {
       show: {
         operation: ['delete'],
@@ -289,11 +289,11 @@ export class Prompticus implements INodeType {
     properties: [
       ...resourceProperties,
       ...operationProperties,
-      ...getListProperties,
-      ...getOneProperties,
       ...createProperties,
-      ...updateProperties,
       ...deleteProperties,
+      ...getManyProperties,
+      ...getOneProperties,
+      ...updateProperties,
     ],
     requestDefaults: {
       baseURL: 'https://api.promptic.us/v1',
