@@ -1,4 +1,9 @@
-import type { ICredentialType, INodeProperties } from 'n8n-workflow';
+import type {
+  IAuthenticateGeneric,
+  ICredentialType,
+  ICredentialTestRequest,
+  INodeProperties,
+} from 'n8n-workflow';
 
 export class PrompticusApi implements ICredentialType {
   displayName = 'Prompticus API';
@@ -19,12 +24,19 @@ export class PrompticusApi implements ICredentialType {
     },
   ];
 
-  authenticate = {
+  authenticate: IAuthenticateGeneric = {
     properties: {
       headers: {
         Authorization: '=Bearer {{$credentials.token}}',
       },
     },
-    type: 'generic' as const,
+    type: 'generic',
+  };
+
+  test: ICredentialTestRequest = {
+    request: {
+      baseURL: 'https://api.promptic.us',
+      url: 'authentication/test',
+    },
   };
 }
